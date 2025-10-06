@@ -1,0 +1,260 @@
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+
+interface SubscriptionPlan {
+    const upgradeToPro = async () => {
+    try {
+      const customerId = 'cus_example123';
+      // TODO: Implement moonPay integration
+      // const moonPaySubscription = await moonPayApi.createSubscription('plan_pro_monthly', customerId);
+      
+      const newState = {
+        ...subscription,
+        plan: 'pro' as SubscriptionPlan,
+        features: getFeatures('pro'),
+        isTrialActive: false,
+        billing: {
+          nextBillingDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+          amount: 29.99,
+          subscriptionId: 'temp_sub_' + Date.now(),
+        }
+      };
+      setSubscription(newState);
+      localStorage.setItem('subscription', JSON.stringify(newState));: string;
+  price: number;
+  features: string[];
+}
+
+interface SubscriptionState {
+  plan: 'free' | 'basic' | 'premium' | 'pro';
+  isActive: boolean;
+  languages: number | 'all';
+  hasWordbook: boolean;
+  hasChatbot: boolean;
+  hasOfflinePacks: boolean;
+  hasFamilyAccounts: boolean;
+  hasAdvancedTutor: boolean;
+}
+
+export interface SubscriptionState {
+  plan: SubscriptionPlan;
+  trialDaysLeft: number;
+  isTrialActive: boolean;
+  features: SubscriptionFeatures;
+  usage: {
+    translations: number;
+    speechMinutes: number;
+    ocrScans: number;
+  };
+  billing: {
+    subscriptionId?: string;
+    customerId?: string;
+    nextBillingDate?: number;
+    paymentStatus: PaymentStatus;
+    lastPaymentFailed: boolean;
+  };
+}
+
+interface SubscriptionContextType {
+  subscription: SubscriptionState;
+  upgradeToPro: () => Promise<void>;
+  upgradeToPremium: () => Promise<void>;
+  cancelSubscription: () => Promise<void>;
+  retryPayment: () => Promise<void>;
+  canUseFeature: (feature: keyof SubscriptionFeatures) => boolean;
+  getRemainingUsage: (type: 'translations' | 'speechMinutes' | 'ocrScans') => number | 'unlimited';
+}
+
+const SubscriptionContext = createContext<SubscriptionContextType | undefined>(undefined);
+
+const getFeatures = (plan: SubscriptionPlan): SubscriptionFeatures => {
+  switch (plan) {
+    case 'free':
+      return {
+        translations: 50,
+        speechMinutes: 10,
+        ocrScans: 5,
+        languages: 3,
+        hasWordbook: false,
+        hasChatbot: false,
+        hasOfflinePacks: false,
+        hasFamilyAccounts: false,
+        hasAdvancedTutor: false,
+      };
+    case 'pro':
+      return {
+        translations: 'unlimited',
+        speechMinutes: 300,
+        ocrScans: 100,
+        languages: 'all',
+        hasWordbook: true,
+        hasChatbot: true,
+        hasOfflinePacks: true,
+        hasFamilyAccounts: false,
+        hasAdvancedTutor: false,
+      };
+    case 'premium':
+      return {
+        translations: 'unlimited',
+        speechMinutes: 'unlimited',
+        ocrScans: 'unlimited',
+        languages: 'all',
+        hasWordbook: true,
+        hasChatbot: true,
+        hasOfflinePacks: true,
+        hasFamilyAccounts: true,
+        hasAdvancedTutor: true,
+      };
+  }
+};
+
+export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [subscription, setSubscription] = useState<SubscriptionState>({
+    plan: 'free',
+    trialDaysLeft: 7,
+    isTrialActive: true,
+    features: getFeatures('free'),
+    usage: {
+      translations: 0,
+      speechMinutes: 0,
+      ocrScans: 0,
+    },
+    billing: {
+      paymentStatus: 'none',
+      lastPaymentFailed: false,
+    },
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem('subscription');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setSubscription({
+        ...parsed,
+        features: getFeatures(parsed.plan),
+      });
+    }
+  }, []);
+
+  const upgradeToPro = async () => {
+    try {
+      const customerId = 'cus_example123';
+      const moonPaySubscription = await moonPayApi.createSubscription('plan_pro_monthly', customerId);
+      
+      const newState = {
+        ...subscription,
+        plan: 'pro' as SubscriptionPlan,
+        features: getFeatures('pro'),
+        isTrialActive: false,
+        billing: {
+          subscriptionId: moonPaySubscription.id,
+          customerId,
+          nextBillingDate: moonPaySubscription.currentPeriodEnd,
+          paymentStatus: 'succeeded' as PaymentStatus,
+          lastPaymentFailed: false,
+        },
+      };
+      setSubscription(newState);
+      localStorage.setItem('subscription', JSON.stringify(newState));
+    } catch (error) {
+      console.error('Failed to upgrade to Pro:', error);
+    }
+  };
+
+  const upgradeToPremium = async () => {
+    try {
+      const customerId = 'cus_example123';
+      const moonPaySubscription = await moonPayApi.createSubscription('plan_premium_monthly', customerId);
+      
+      const newState = {
+        ...subscription,
+        plan: 'premium' as SubscriptionPlan,
+        features: getFeatures('premium'),
+        isTrialActive: false,
+        billing: {
+          subscriptionId: moonPaySubscription.id,
+          customerId,
+          nextBillingDate: moonPaySubscription.currentPeriodEnd,
+          paymentStatus: 'succeeded' as PaymentStatus,
+          lastPaymentFailed: false,
+        },
+      };
+      setSubscription(newState);
+      localStorage.setItem('subscription', JSON.stringify(newState));
+    } catch (error) {
+      console.error('Failed to upgrade to Premium:', error);
+    }
+  };
+
+  const canUseFeature = (feature: keyof SubscriptionFeatures): boolean => {
+    return Boolean(subscription.features[feature]);
+  };
+
+  const getRemainingUsage = (type: 'translations' | 'speechMinutes' | 'ocrScans') => {
+    const limit = subscription.features[type];
+    if (limit === 'unlimited') return 'unlimited';
+    return Math.max(0, (limit as number) - subscription.usage[type]);
+  };
+
+  const cancelSubscription = async () => {
+    try {
+      if (subscription.billing.subscriptionId) {
+        await moonPayApi.cancelSubscription(subscription.billing.subscriptionId);
+        const newState = {
+          ...subscription,
+          billing: { ...subscription.billing, paymentStatus: 'canceled' as PaymentStatus },
+        };
+        setSubscription(newState);
+        localStorage.setItem('subscription', JSON.stringify(newState));
+      }
+    } catch (error) {
+      console.error('Failed to cancel subscription:', error);
+    }
+  };
+
+  const retryPayment = async () => {
+    try {
+      setSubscription({
+        ...subscription,
+        billing: { ...subscription.billing, paymentStatus: 'processing', lastPaymentFailed: false },
+      });
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      const success = Math.random() > 0.2;
+      const newState = {
+        ...subscription,
+        billing: {
+          ...subscription.billing,
+          paymentStatus: success ? 'succeeded' as PaymentStatus : 'failed' as PaymentStatus,
+          lastPaymentFailed: !success,
+        },
+      };
+      setSubscription(newState);
+      localStorage.setItem('subscription', JSON.stringify(newState));
+    } catch (error) {
+      console.error('Failed to retry payment:', error);
+    }
+  };
+
+  return (
+    <SubscriptionContext.Provider
+      value={{
+        subscription,
+        upgradeToPro,
+        upgradeToPremium,
+        cancelSubscription,
+        retryPayment,
+        canUseFeature,
+        getRemainingUsage,
+      }}
+    >
+      {children}
+    </SubscriptionContext.Provider>
+  );
+};
+
+export const useSubscription = () => {
+  const context = useContext(SubscriptionContext);
+  if (context === undefined) {
+    throw new Error('useSubscription must be used within a SubscriptionProvider');
+  }
+  return context;
+};
