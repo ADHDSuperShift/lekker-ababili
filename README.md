@@ -1,32 +1,37 @@
-# Lekker Ababili - Mobile Language Learning App
+# Lekker Ababili - Language Learning for Afrikaans Speakers
 
-A React Native language learning application built with Expo, featuring AI-powered tutoring, interactive exercises, and progress tracking.
+A modern web-based language learning platform designed specifically for **Afrikaans speakers** to learn other languages. All lessons, explanations, and instructions are provided in Afrikaans, making it easier for native Afrikaans speakers to grasp new languages.
 
-## Features
+## 🌍 Purpose
 
-- **Authentication**: User registration and login with AsyncStorage persistence
-- **Learn Screen**: Browse lessons with difficulty levels and progress tracking
-- **AI Chat Tutor**: Interactive conversation with AI language assistant
-- **Interactive Exercises**: Multiple-choice quizzes with immediate feedback
-- **Profile Management**: User stats, achievements, and settings
-- **Bottom Tab Navigation**: Intuitive mobile navigation between main features
+**Lekker Ababili** helps Afrikaans speakers learn languages like English, Spanish, French, German, Chinese, and more - all taught in their native Afrikaans language.
 
-## Tech Stack
+## ✨ Features
 
-- **React Native** with Expo
-- **TypeScript** for type safety
-- **React Navigation** for navigation
-- **AsyncStorage** for local data persistence
-- **Expo Vector Icons** for consistent iconography
+- **Multi-Language Support**: Learn English, Spanish, French, German, Portuguese, Italian, Zulu, Xhosa, Chinese, Japanese, Korean, Arabic, Russian, Dutch, and more
+- **AI-Powered Tutoring**: Interactive chat tutor that explains concepts in Afrikaans
+- **Interactive Exercises**: Quizzes and practice sessions with Afrikaans instructions
+- **AR Translation**: Camera-based real-time translation with Afrikaans explanations
+- **Voice Practice**: Pronunciation coaching with Afrikaans feedback
+- **Progress Tracking**: Monitor your learning journey
+- **Adaptive Learning**: Personalized lesson paths based on your progress
+
+## 🛠 Tech Stack
+
+- **React** with **TypeScript** for type safety
+- **Vite** for fast development and builds
+- **Tailwind CSS** + **shadcn/ui** for modern styling
+- **React Router** for navigation
 - **Context API** for state management
+- **TTS Services** for pronunciation
+- **Supabase** for backend (optional)
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (v14 or later)
-- Expo CLI: `npm install -g expo-cli`
-- Expo Go app on your mobile device (for testing)
+- Node.js (v18 or later)
+- npm or yarn
 
 ### Installation
 

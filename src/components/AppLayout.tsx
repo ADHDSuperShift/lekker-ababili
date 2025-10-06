@@ -23,10 +23,10 @@ export const AppLayout = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Learn Afrikaans and Zulu 🇿🇦</h2>
-          <p className="text-xl mb-8">Interactive lessons, AR translation, and personalized tutoring</p>
+          <h2 className="text-4xl font-bold mb-6">Leer Tale in Afrikaans �</h2>
+          <p className="text-xl mb-8">Learn any language with lessons, AR translation, and AI tutoring - all taught in Afrikaans</p>
           <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
-            Start Learning
+            Begin Leer / Start Learning
           </button>
         </div>
       </section>
@@ -44,20 +44,27 @@ export const AppLayout = () => {
           
           <TabsContent value="learn" className="mt-6">
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-2xl font-bold mb-4">Learning Center</h3>
-              <div className="grid md:grid-cols-2 gap-6">
+              <h3 className="text-2xl font-bold mb-4">Leergeleenthede / Learning Center</h3>
+              <div className="grid md:grid-cols-3 gap-6">
                 <div className="border rounded-lg p-4">
-                  <h4 className="font-semibold mb-2">Afrikaans Basics</h4>
-                  <p className="text-gray-600 mb-4">Learn essential Afrikaans phrases</p>
+                  <h4 className="font-semibold mb-2">🇬🇧 English</h4>
+                  <p className="text-gray-600 mb-4">Leer Engels in Afrikaans</p>
                   <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                    Start Lesson
+                    Begin Les
                   </button>
                 </div>
                 <div className="border rounded-lg p-4">
-                  <h4 className="font-semibold mb-2">Zulu Fundamentals</h4>
-                  <p className="text-gray-600 mb-4">Master basic Zulu conversation</p>
+                  <h4 className="font-semibold mb-2">🇪🇸 Spanish</h4>
+                  <p className="text-gray-600 mb-4">Leer Spaans in Afrikaans</p>
+                  <button className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+                    Begin Les
+                  </button>
+                </div>
+                <div className="border rounded-lg p-4">
+                  <h4 className="font-semibold mb-2">🇿🇦 Zulu</h4>
+                  <p className="text-gray-600 mb-4">Leer Zulu in Afrikaans</p>
                   <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                    Start Lesson
+                    Begin Les
                   </button>
                 </div>
               </div>
