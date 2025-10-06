@@ -22,13 +22,9 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     global: 'globalThis',
-    'process.env': '({})',
+    'process.env': '{}',
     'process.platform': '"browser"',
     'process.version': '"v18.0.0"',
-  },
-  optimizeDeps: {
-    include: ['@moonpay/moonpay-react'],
-    exclude: [],
   },
   build: {
     rollupOptions: {
