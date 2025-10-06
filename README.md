@@ -32,22 +32,42 @@ A modern web-based language learning platform designed specifically for **Afrika
 
 - Node.js (v18 or later)
 - npm or yarn
+- A Supabase account (https://supabase.com)
 
 ### Installation
 
-1. Clone the repository
-2. Install dependencies:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ADHDSuperShift/lekker-ababili.git
+   cd lekker-ababili
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-3. Start the development server:
-   ```bash
-   npm start
+3. **Set up Supabase** (see [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) for detailed instructions)
+   - Create a Supabase project
+   - Run the database schema from `supabase-schema.sql`
+   - Copy your project URL and anon key
+
+4. **Configure environment variables**
+   
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
 
-4. Scan the QR code with Expo Go app or run on simulator:
+5. **Start the development server**
    ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   
+   Navigate to `http://127.0.0.1:8080
    npm run ios    # for iOS simulator
    npm run android # for Android emulator
    ```
