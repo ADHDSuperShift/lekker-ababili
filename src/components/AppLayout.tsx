@@ -45,26 +45,61 @@ export const AppLayout = () => {
           <TabsContent value="learn" className="mt-6">
             <div className="bg-white rounded-lg shadow-lg p-6">
               <h3 className="text-2xl font-bold mb-4">Leergeleenthede / Learning Center</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="border rounded-lg p-4">
+              <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
                   <h4 className="font-semibold mb-2">🇬🇧 English</h4>
                   <p className="text-gray-600 mb-4">Leer Engels in Afrikaans</p>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                  <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">
                     Begin Les
                   </button>
                 </div>
-                <div className="border rounded-lg p-4">
+                <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
                   <h4 className="font-semibold mb-2">🇪🇸 Spanish</h4>
                   <p className="text-gray-600 mb-4">Leer Spaans in Afrikaans</p>
-                  <button className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+                  <button className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 w-full">
                     Begin Les
                   </button>
                 </div>
-                <div className="border rounded-lg p-4">
+                <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
+                  <h4 className="font-semibold mb-2">�� French</h4>
+                  <p className="text-gray-600 mb-4">Leer Frans in Afrikaans</p>
+                  <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 w-full">
+                    Begin Les
+                  </button>
+                </div>
+                <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
+                  <h4 className="font-semibold mb-2">🇩🇪 German</h4>
+                  <p className="text-gray-600 mb-4">Leer Duits in Afrikaans</p>
+                  <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 w-full">
+                    Begin Les
+                  </button>
+                </div>
+                <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
+                  <h4 className="font-semibold mb-2">🇨🇳 Chinese</h4>
+                  <p className="text-gray-600 mb-4">Leer Chinees in Afrikaans</p>
+                  <button className="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 w-full">
+                    Begin Les
+                  </button>
+                </div>
+                <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
+                  <h4 className="font-semibold mb-2">🇮🇹 Italian</h4>
+                  <p className="text-gray-600 mb-4">Leer Italiaans in Afrikaans</p>
+                  <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full">
+                    Begin Les
+                  </button>
+                </div>
+                <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
                   <h4 className="font-semibold mb-2">🇿🇦 Zulu</h4>
                   <p className="text-gray-600 mb-4">Leer Zulu in Afrikaans</p>
-                  <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                  <button className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 w-full">
                     Begin Les
+                  </button>
+                </div>
+                <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-gray-50">
+                  <h4 className="font-semibold mb-2">➕ More Languages</h4>
+                  <p className="text-gray-600 mb-4">Portuguese, Japanese, Korean & more</p>
+                  <button className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 w-full">
+                    View All
                   </button>
                 </div>
               </div>
